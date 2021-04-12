@@ -36,7 +36,7 @@ contract NipponToken is IERC20 {
     string public constant name = "NipponToken";
     string public constant symbol = "NPNT";
     uint8 public constant decimals = 18;
-    uint256 totalSupply_ = 100000000000000000000000000;
+    uint256 _totalSupply = 100000000000000000000000000;
 
     mapping(address => uint256) balances;
     mapping(address => mapping (address => uint256)) allowed;
@@ -45,12 +45,13 @@ contract NipponToken is IERC20 {
 
 
     constructor() public {
-        balances[msg.sender] = totalSupply_;
+        balances[msg.sender] = _totalSupply;
+        emit Transfer(address(0), msg.sender, _totalSupply);
     }
 
 
     function totalSupply() public override view returns (uint256) {
-        return totalSupply_;
+        return _totalSupply;
     }
 
 
